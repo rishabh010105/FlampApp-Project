@@ -1,0 +1,223 @@
+:root {
+    --bg-color: #f0f2f5;
+    --panel-bg: rgba(255, 255, 255, 0.85);
+    --panel-border: 1px solid rgba(255, 255, 255, 0.5);
+    --text-primary: #1f2937;
+    --text-secondary: #6b7280;
+    --accent: #3b82f6;
+    --danger: #ef4444;
+    --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    user-select: none;
+}
+
+body {
+    font-family: 'Outfit', sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-primary);
+    overflow: hidden;
+    height: 100vh;
+    width: 100vw;
+}
+
+#app {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+canvas {
+    display: block;
+    cursor: crosshair;
+    background-color: white;
+    touch-action: none;
+}
+
+#ui-layer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.panel {
+    background: var(--panel-bg);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: var(--panel-border);
+    border-radius: 16px;
+    box-shadow: var(--shadow);
+    padding: 12px 20px;
+    pointer-events: auto;
+    display: flex;
+    gap: 16px;
+    align-items: center;
+}
+
+#toolbar {
+    height: 60px;
+}
+
+.tool-group {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.divider {
+    width: 1px;
+    height: 24px;
+    background-color: #e5e7eb;
+}
+
+.icon-btn {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 8px;
+    border-radius: 8px;
+    color: var(--text-secondary);
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.icon-btn.active {
+    background-color: var(--accent);
+    color: white;
+}
+
+.icon-btn:hover:not(.active) {
+    background-color: rgba(0, 0, 0, 0.05);
+    color: var(--text-primary);
+}
+
+.icon-btn:active {
+    transform: scale(0.95);
+}
+
+.text-btn {
+    background: white;
+    border: 1px solid #e5e7eb;
+    padding: 8px 16px;
+    border-radius: 8px;
+    font-family: inherit;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.text-btn.danger {
+    color: var(--danger);
+    border-color: #fee2e2;
+    background-color: #fef2f2;
+}
+
+.text-btn.danger:hover {
+    background-color: #fee2e2;
+}
+
+#brush-size {
+    width: 100px;
+    accent-color: var(--text-primary);
+}
+
+.color-preview {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    border: 2px solid white;
+    box-shadow: 0 0 0 1px #e5e7eb;
+}
+
+.status-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: #ccc;
+    transition: background-color 0.3s;
+}
+
+.status-dot.connected {
+    background-color: #10b981;
+    box-shadow: 0 0 0 4px rgba(16, 185, 129, 0.2);
+}
+
+#user-list {
+    flex-direction: column;
+    align-items: flex-start;
+    min-width: 200px;
+}
+
+#user-list h4 {
+    margin-bottom: 8px;
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+#users-container {
+    list-style: none;
+    width: 100%;
+}
+
+.user-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 0;
+    font-size: 0.9rem;
+}
+
+.user-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+}
+
+.user-tag {
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+    background: #f3f4f6;
+    padding: 2px 6px;
+    border-radius: 4px;
+    margin-left: auto;
+}
+
+.cursor {
+    position: absolute;
+    pointer-events: none;
+    transition: transform 0.1s linear;
+    z-index: 100;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.cursor-icon {
+    width: 14px;
+    height: 14px;
+}
+
+.cursor-label {
+    background: rgba(0, 0, 0, 0.7);
+    color: white;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-size: 10px;
+    margin-top: 4px;
+    white-space: nowrap;
+}
